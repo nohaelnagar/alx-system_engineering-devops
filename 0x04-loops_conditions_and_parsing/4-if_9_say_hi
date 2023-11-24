@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Best School 10 times using if and while loop
+count=1
+while [ $count -le 10 ]
+do
+    echo "Best School"
+    if [ $count = 9 ]
+    then
+        echo "Hi"
+    fi
+    ((count++))
+done

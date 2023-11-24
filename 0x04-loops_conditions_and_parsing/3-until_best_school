@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Best School 10 times using while loop
+# Best School 10 times using until loop
 count=1
 until [ $count -gt 10 ]
 do
