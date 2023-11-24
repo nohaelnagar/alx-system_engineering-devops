@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Best School 10 times using if and while loop
+# strange numbers
 count=1
 while [ $count -le 20 ]
 do
