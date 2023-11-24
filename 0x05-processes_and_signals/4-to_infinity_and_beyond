@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Display the processes
-# while true of using for loop
+# use (while true) or using for loop
 for (( ; ; ))
 do
     echo "To infinity and beyond"
