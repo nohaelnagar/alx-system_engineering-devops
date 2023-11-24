@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # Display the processes
-pc -aufx
+ps -ef
+ps aux
