@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Best School 10 times using while loop
 count=1
-until [ $count -ge 11 ]
+until [ $count -gt 10 ]
 do
     echo "Best School"
     ((count++))
