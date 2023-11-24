@@ -5,11 +5,11 @@ while [ $count -le 20 ]
 do
     echo $count
     case $count in
-        4)
+        4 )
             echo "Bad luck from China" ;;
-        9)
+        9 )
             echo "Bad luck from Japan" ;;
-        17)
+        17 )
             echo "Bad luck from Italy" ;;
     esac
     ((count++))
