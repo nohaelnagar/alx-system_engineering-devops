@@ -1,0 +1,56 @@
+What Happens When You Type https://www.google.com in Your Browser and Press Enter?
+Introduction
+When you type https://www.google.com into your browser and press Enter, a complex series of events is set in motion. These events involve multiple technologies and protocols working together to deliver the requested webpage to your screen. This blog post will break down this process into several key components: DNS request, TCP/IP, Firewall, HTTPS/SSL, Load-balancer, Web server, Application server, and Database.
+
+1. DNS Request
+The first step in this process is the DNS (Domain Name System) request. When you enter https://www.google.com, the browser needs to convert this human-readable domain name into an IP address that computers can use to locate the server.
+
+DNS Lookup: The browser checks its cache to see if it has recently looked up the IP address for www.google.com. If not, it sends a request to a DNS resolver, typically provided by your ISP (Internet Service Provider) or a public DNS service like Google DNS.
+Resolver Query: The DNS resolver queries a series of DNS servers, starting with the root DNS servers, then the TLD (Top Level Domain) servers (for .com), and finally the authoritative DNS servers for google.com.
+IP Address: The resolver returns the IP address associated with www.google.com to the browser.
+2. TCP/IP
+With the IP address in hand, the browser initiates a TCP (Transmission Control Protocol) connection to the server using the IP address. This process involves a few key steps:
+
+Three-Way Handshake: The browser and the server perform a three-way handshake to establish a TCP connection. This includes:
+SYN: The browser sends a SYN (synchronize) packet to the server.
+SYN-ACK: The server responds with a SYN-ACK (synchronize-acknowledge) packet.
+ACK: The browser sends an ACK (acknowledge) packet to confirm the connection.
+3. Firewall
+Firewalls are security devices that monitor and control incoming and outgoing network traffic based on predetermined security rules.
+
+Client-Side Firewall: Your computer or network may have a firewall that allows or blocks the outgoing request to the server.
+Server-Side Firewall: The server's network likely has a firewall that allows the incoming request from your IP address, provided it doesn't match any block rules.
+4. HTTPS/SSL
+Since the URL begins with https, the communication between the browser and the server is encrypted using HTTPS (HyperText Transfer Protocol Secure).
+
+SSL/TLS Handshake: This involves the following steps:
+The browser requests the server's SSL certificate.
+The server sends its SSL certificate, which includes the server's public key.
+The browser verifies the certificate with a trusted Certificate Authority (CA).
+Both the browser and server agree on a session key to encrypt the subsequent communication.
+5. Load-Balancer
+Large websites like Google use load balancers to distribute incoming traffic across multiple servers to ensure availability and reliability.
+
+Traffic Distribution: The load balancer receives the incoming request and directs it to one of the available servers based on various algorithms (e.g., round-robin, least connections, etc.).
+Session Persistence: The load balancer may use session persistence (or sticky sessions) to ensure that requests from the same user are sent to the same server during a session.
+6. Web Server
+The load balancer forwards the request to a web server, which handles HTTP requests.
+
+HTTP Request Handling: The web server receives the request for https://www.google.com and processes it.
+Static Content: If the request is for static content (e.g., HTML, CSS, JavaScript files), the web server retrieves it from its storage and sends it back to the browser.
+7. Application Server
+If the request requires dynamic content or interaction with a backend service, the web server forwards the request to an application server.
+
+Business Logic: The application server processes the request using the business logic defined in the application.
+Database Interaction: If necessary, the application server queries the database to retrieve or store data.
+8. Database
+When the application server needs to retrieve or store data, it interacts with a database server.
+
+Query Execution: The application server sends a query to the database.
+Data Retrieval: The database executes the query and sends the results back to the application server.
+Data Storage: If the request involves storing data, the database performs the necessary insert/update operations.
+Conclusion
+After processing the request, the application server sends the response back to the web server, which then sends it to the load balancer. The load balancer forwards the response to your browser. Your browser receives the data, decrypts it if necessary, and renders the webpage, displaying the Google homepage.
+
+Understanding this complex workflow is crucial for software engineers as it highlights the various components and protocols that work together to deliver web content. Mastery of these concepts not only prepares you for technical interviews but also equips you with the knowledge to build and troubleshoot web applications effectively.
+
