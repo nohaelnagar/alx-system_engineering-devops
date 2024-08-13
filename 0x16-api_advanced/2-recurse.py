@@ -1,47 +1,37 @@
+#!/usr/bin/python3
+"""
+Recursive function that queries the Reddit API and returns
+a list containing the titles of all hot articles for a given subreddit.
+If no results are found for the given subreddit,
+the function should return None.
+"""
+
 import requests
-import sys
 
-def recurse(subreddit, hot_list=[], after=None):
-    """ Recursively queries the Reddit API to retrieve titles of all hot
-        articles in a given subreddit.
-    Args:
-        subreddit (str): The name of the subreddit to check.
-        hot_list (list): store the titles of hot articles.
-        after (str): pagination, starting point for the next page.
-    Returns:
-        list or None: contains titles of all hot articles for the
-        given subreddit,or None if no results are found. """
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+def recurse(subreddit, hot_list=[], after=""):
+    """
+    Queries the Reddit API and returns
+    a list containing the titles of all hot articles for a given subreddit.
 
-    data = requests.get(url, headers={'User-agent': 'my-bot'},
-                        params={'after': after}, allow_redirects=False)
+    - If not a valid subreddit, return None.
+    """
+    req = requests.get(
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+        params={"after": after},
+    )
 
-    if data.status_code == 200:
-        after = data.json()['data']['after']
-        posts = data.json()['data']['children']
+    if req.status_code == 200:
+        for get_data in req.json().get("data").get("children"):
+            dat = get_data.get("data")
+            title = dat.get("title")
+            hot_list.append(title)
+        after = req.json().get("data").get("after")
 
-        for post in posts:
-            hot_list.append(post['data']['title'])
         if after is None:
-            # If there is no new page
-            if len(hot_list) == 0:
-                return None
-
             return hot_list
         else:
-            # If there is another page
             return recurse(subreddit, hot_list, after)
     else:
         return None
-    
-
-# TestRun =========== working, but Mr checker has frowned against it for reason best known to it.
-if len(sys.argv) < 2:
-    print("Please pass an argument for the subreddit to search.")
-else:
-    result = recurse(sys.argv[1])
-    if result is not None:
-        print(len(result))
-    else:
-        print("None")
